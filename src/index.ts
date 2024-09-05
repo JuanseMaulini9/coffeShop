@@ -1,14 +1,18 @@
 import express from "express";
 import dotenv from "dotenv";
 
-import routes from "./routes/products";
+import productRoutes from "./routes/products.routes";
+import categoryRoutes from "./routes/category.routes";
 
-const app = express();
 dotenv.config();
-
 const PORT = process.env.PORT;
 
-app.use(routes);
+const app = express();
+
+app.use(express.json());
+
+app.use("/api/products", productRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.listen(PORT, () => {
   console.log(`http://localhost:${PORT}/`);
